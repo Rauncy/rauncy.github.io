@@ -28,6 +28,9 @@
                 height: 150px;
                 background-color: #CCC;
             }
+            td{
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -42,7 +45,6 @@
         var guessed = [];
         var TERMS = ["HTML", "CSS", "Javascript", "head", "body", "!DOCTYPE&nbsp;html", "h1", "h2", "h3", "h4", "h5", "h6", "a", "p", "margin", "border", "padding", "content", "script", "style", "Github", "Embed", "color", "font-size", "div", "background-color", "var", "title", "document", "position", "text-align", "img", "link", "meta", "iframe", "class", "id", "href", "onclick", "url", "em"];
         const game = document.getElementById("game");
-
         function setupBingo(){
             var toHtml = "<table>";
             for(var i=0;i<5;i++){
@@ -60,11 +62,9 @@
             }
             game.innerHTML = toHtml+"</table>";
         }
-
         function setupHost(){
             game.innerHTML = "<button onclick = \"chooseRandom()\">Select</button><div id=\"terms\"></div>"
         }
-
         function chooseRandom(){
             document.getElementById("terms").innerHTML += "<h2>"+TERMS.splice(Math.floor(Math.random()*TERMS.length),1)[0]+"</h2>";
         }
