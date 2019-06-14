@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Super Sensei Online Bingo</title>
+        <style>
+            h1{
+                font-family: sans-serif;
+                font-size: 50px;
+            }
+            .chosen{
+                background-color: darksalmon;
+            }
+            body{
+                text-align: center;
+                background-color: #AAA;
+            }
+            a{
+                margin:25px;
+                text-decoration: none;
+                color: black;
+                font-size: 25px;
+            }
+            td{
+                width: 150px;
+                height: 150px;
+                background-color: #CCC;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>HTML Bingo</h1>
+        <div id="game">
+            <a href = "javascript:setupBingo()">Play Bingo</a><a href = "javascript:setupHost()">Host Bingo</a>
+        </div>
+    </body>
+    <script>
+        var guessed = [];
+        var TERMS = ["HTML", "CSS", "Javascript", "head", "body", "!DOCTYPE&nbsp;html", "h1", "h2", "h3", "h4", "h5", "h6", "a", "p", "margin", "border", "padding", "content", "script", "style", "Github", "Embed", "color", "font-size", "div", "background-color", "var", "title", "document", "position", "text-align", "img", "link", "meta", "iframe"];
+        const game = document.getElementById("game");
+
+        function setupBingo(){
+            var toHtml = "<table>";
+            for(var i=0;i<5;i++){
+                toHtml+="<tr>";
+                for(var j=0;j<5;j++){
+                    if(i==2&&j==2){
+                        toHtml+="<td class=\"chosen\">FREE</td>";
+                    }else{
+                        let rand = TERMS.splice(Math.floor(Math.random()*TERMS.length),1)[0];
+                        console.log(rand);
+                        toHtml+="<td onclick=\"highlight('"+rand+"')\">"+rand+"</td>";
+                    }
+                }
+                toHtml+="</tr>";
+            }
+            game.innerHTML = toHtml+"</table>";
+        }
+
+        function setupHost(){
+            game.innerHTML = "<button onclick = \"chooseRandom()\">Select</button><h1 id=\"term\"></h1>"
+        }
+
+        function chooseRandom(){
+            document.getElementById("term").innerHTML = TERMS.splice(Math.floor(Math.random()*TERMS.length),1)[0];
+        }
+        
+        function highlight(term){
+            console.log("run");
+            let tds = document.getElementsByTagName("td");
+            for(var i=0;i<tds.length;i++){
+                if(tds[i].innerHTML.trim() == term){
+                    tds[i].classList.add("chosen");
+                    console.log("found");
+                    return;
+                }
+            }
+        }
+        </script>
+</html>
